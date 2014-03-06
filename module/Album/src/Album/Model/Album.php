@@ -14,9 +14,9 @@ class Album implements InputFilterAwareInterface
 	
 	public function exchangeArray($data)
 	{
-		$this->id     = (isset($data['id']))     ? $data['id']     : NULL;
-		$this->artist = (isset($data['artist'])) ? $data['artist'] : NULL;
-		$this->title  = (isset($data['title']))  ? $data['title']  : NULL;
+		$this->id     = (isset($data['id']))     ? $data['id']     : null;
+		$this->artist = (isset($data['artist'])) ? $data['artist'] : null;
+		$this->title  = (isset($data['title']))  ? $data['title']  : null;
 	}
 	
 	public function setInputFilter(InputFilterInterface $inputFilter)
