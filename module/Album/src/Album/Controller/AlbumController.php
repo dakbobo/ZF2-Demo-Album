@@ -61,7 +61,7 @@ class AlbumController extends AbstractActionController
 		$form->get('submit')->setAttribute('value', 'Edit');
 		
 		$request = $this->getRequest();
-		if ($request->isPost) {
+		if ($request->isPost()) {
 			$form->setInputFilter($album->getInputFilter());
 			$form->setData($request->getPost());
 			
@@ -71,6 +71,10 @@ class AlbumController extends AbstractActionController
 				return $this->redirect()->toRoute('album');
 			}
 		}
+		return array(
+			'id' => $id,
+			'form' => $form,
+		);
 	}
 	
 	public function deleteAction()
