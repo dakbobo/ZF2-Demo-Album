@@ -1,89 +1,16 @@
 <?php
 namespace Album\Model;
 
-use Zend\InputFilter\InputFilterAwareInterface;
-use Zend\InputFilter\InputFilterInterface;
-use Zend\InputFilter\InputFilter;
-use Zend\InputFilter\Factory as InputFactory;
-
-class Album implements InputFilterAwareInterface
+class Album
 {
 	public $id;
 	public $artist;
 	public $title;
-	protected $inputFilter;
 	
 	public function exchangeArray($data)
 	{
-		$this->id     = (isset($data['id']))     ? $data['id']     : null;
-		$this->artist = (isset($data['artist'])) ? $data['artist'] : null;
-		$this->title  = (isset($data['title']))  ? $data['title']  : null;
-	}
-	
-	public function setInputFilter(InputFilterInterface $inputFilter)
-	{
-		throw new \Exception("Not used");
-	}
-	
-	public function getInputFilter()
-	{
-		if (!$this->inputFilter) {
-			$inputFilter = new InputFilter();
-			$factory     = new InputFactory();
-			
-			$inputFilter->add($factory->createInput(array(
-				'name'     => 'id',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'Int'),
-				),
-			)));
-			
-			$inputFilter->add($factory->createInput(array(
-				'mane'     => 'artist',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-					array(
-						'name'    => 'StringLength',
-						'options' => array(
-							'encoding' => 'UTF-8',
-							'min' => 1,
-							'max' => 100,
-						),
-					),
-				),
-			)));
-			
-			$inputFilter->add($factory->createInput(array(
-				'name'     => 'title',
-				'required' => true,
-				'filters'  => array(
-					array('name' => 'StripTags'),
-					array('name' => 'StringTrim'),
-				),
-				'validators' => array(
-					array(
-						'name'    => 'StringLength',
-						'options' => array(
-							'encoding' => 'UTF-8',
-							'min' => 1,
-							'max' => 100,
-						),
-					),
-				),
-			)));
-			
-			$this->inputFilter = $inputFilter;
-		}
-		return $this->inputFilter;
-	}
-	
-	public function getArrayCopy()
-	{
-		return get_object_vars($this);
+		$this->id     = (!empty($data['id'])) ? $data['id'] : NULL;
+		$this->artist = (!empty($data['artist'])) ? $data['artist'] : NULL;
+		$this->title = (!empty($data['title'])) ? $data['title'] : NULL;
 	}
 }
