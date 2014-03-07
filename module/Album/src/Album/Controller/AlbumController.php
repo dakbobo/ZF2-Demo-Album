@@ -79,7 +79,27 @@ class AlbumController extends AbstractActionController
 	
 	public function deleteAction()
 	{
+		$id = (int) $this->params()->fomrRoute('id', 0);
+		if (!$id) {
+			return $this->redirect()->toRoute('album');
+		}
 		
+		$request = $this->getRequest();
+		if ($request->isPost()) {
+			$del = $request->getPost('del', 'NO');
+			
+			if ($del == 'Yes') {
+				$id = (int) $request->getPost('id');
+				$this->getAlbumTable()->deleteAlbum($id);
+			}
+			
+			return $this->redirect()->toRoute('album');
+		}
+		
+		return array(
+			'id'    => $id,
+			'album' => $this->getAlbumTable()->getAlbum($id)
+		);
 	}
 	
 	public function getAlbumTable()
