@@ -1,7 +1,7 @@
 <?php
 namespace Album\Model;
 
-use Zend\db\tableGateway\TableGateway;
+use Zend\Db\TableGateway\TableGateway;
 
 class AlbumTable
 {
@@ -33,23 +33,24 @@ class AlbumTable
 	{
 		$data = array(
 			'artist' => $album->artist,
-			'title' => $album->title,
+			'title'  => $album->title,
 		);
 		
-		$id = (int) $album->id;
+		$id = (int)$album->id;
 		if ($id == 0) {
 			$this->tableGateway->insert($data);
 		} else {
 			if ($this->getAlbum($id)) {
 				$this->tableGateway->update($data, array('id' => $id));
 			} else {
-				throw new \Exception('Album id does not exist');
+				
+				throw new \Exception('Form id does not exist');
 			}
 		}
 	}
 	
 	public function deleteAlbum($id)
 	{
-		$this->tableGateway->delete(array('id' => (int) $id));
+		$this->tableGateway->delete(array('id' => $id));
 	}
 }

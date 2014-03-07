@@ -1,9 +1,10 @@
 <?php
 namespace Album\Model;
 
-use Zend\InputFilter\InputFilter;
 use Zend\InputFilter\InputFilterAwareInterface;
 use Zend\InputFilter\InputFilterInterface;
+use Zend\InputFilter\InputFilter;
+// use Zend\InputFilter\Factory as InputFactory;
 
 class Album implements InputFilterAwareInterface
 {
@@ -28,6 +29,7 @@ class Album implements InputFilterAwareInterface
 	{
 		if (!$this->inputFilter) {
 			$inputFilter = new InputFilter();
+// 			$factory     = new InputFactory();
 			
 			$inputFilter->add(array(
 				'name'     => 'id',
@@ -49,8 +51,8 @@ class Album implements InputFilterAwareInterface
 						'name'    => 'StringLength',
 						'options' => array(
 							'encoding' => 'UTF-8',
-							'min'      => 1,
-							'max'      => 100,
+							'min' => 1,
+							'max' => 100,
 						),
 					),
 				),
@@ -68,8 +70,8 @@ class Album implements InputFilterAwareInterface
 						'name'    => 'StringLength',
 						'options' => array(
 							'encoding' => 'UTF-8',
-							'min'      => 1,
-							'max'      => 100,
+							'min' => 1,
+							'max' => 100,
 						),
 					),
 				),
@@ -77,7 +79,6 @@ class Album implements InputFilterAwareInterface
 			
 			$this->inputFilter = $inputFilter;
 		}
-		
 		return $this->inputFilter;
 	}
 	

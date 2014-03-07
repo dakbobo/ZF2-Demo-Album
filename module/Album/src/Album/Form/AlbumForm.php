@@ -8,7 +8,7 @@ class AlbumForm extends Form
 	public function __construct($name = null)
 	{
 		parent::__construct('album');
-		
+		$this->setAttribute('method', 'post');
 		$this->add(array(
 			'name' => 'id',
 			'type' => 'Hidden',
@@ -29,7 +29,7 @@ class AlbumForm extends Form
 		));
 		$this->add(array(
 			'name' => 'submit',
-			'type' => 'Submit',
+			'type' => 'submit',
 			'attributes' => array(
 				'value' => 'Go',
 				'id' => 'submitbutton',
