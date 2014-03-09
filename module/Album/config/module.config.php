@@ -52,9 +52,4 @@ return array(
             'Album' => __DIR__ . '/../view',
         ),
     ),
-	'service_manager' => array(
-		'factories' => array(
-			'album-transpory' => 'Album\Serviec\Factory\AlbumTranspory'
-		),
-	),
 );
